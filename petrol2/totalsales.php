@@ -1,0 +1,77 @@
+<link rel='stylesheet' type='text/css' href='style.css'>
+<html>
+<head>
+<title>View Sales </title>
+<div style='background-color:gold'>
+<img src='petrol-pump-signs-250x250.jpg' width='200' height='150'><br>
+<font face="Times new roman" size="22"><center><B>PS Petrol Pump System</B></center></font>
+</div>
+<style>
+r
+{
+float:left;
+}
+</style>
+</head>
+<body bgcolor='grey'>
+
+<div class="nav">
+<ul>
+<li><a href="homepetrol.html">Home</a></li>
+<li><a href="Sales.php">Sales</a>
+<ul>
+<li><a href="add_sales.php">Add Sales</a></li>
+<li><a href="delete_sales.php">delete Sales</a></li>
+<li><a href="view_sales.php">View Sales</a></li>
+<li><a href="totalsales.php">Total Sales</a>
+</ul>
+</li>
+<li><a href="petrol_login.php">logout</a></li>
+</ul>
+</div>
+<br><br>
+<center>
+<h1>Sales Records</h1></center>
+<form method='POST' action='view_sales.php' name='search'>
+Enter Sales Date:<input type="text" name="f1">
+<input type="submit" value="submit" name="Submit"></center>
+<?php
+$con=pg_connect("dbname=petroldatabase user=postgres password=redhat");
+$w=$_POST['f1'];
+$q="select * from sales";
+$result =pg_query($q);	
+if($result)
+{
+?>
+<table width='100%' border=1>
+<tr bgcolor='#ffff33'>
+	<th>Sale ID</th>
+	<th>Fuel ID</th>
+	<th>Amount</th>
+	<th>Quantity in <br>Liters</th>
+	<th>Total Price</th>
+  	<th>Date Of Sale</th>
+</tr>
+<?php
+	while($row=pg_fetch_row($result)){
+?>
+<tr bgcolor="white">	
+	<td align='center'><?php echo $row[0]; ?></td>
+	<td align='center'><?php echo $row[1]; ?></td>
+	<td align='center'><?php echo $row[2]; ?></td>
+	<td align='center'><?php echo $row[3]; ?></td>
+	<td align='center'><?php echo $row[4]; ?></td>
+	<td align='center'><?php echo $row[5]; ?></td>
+</tr>
+<?php
+	}
+}
+else
+echo "error";
+?>
+</table>
+<center>
+<p>&copy All Rights Reserved
+</center></p>
+</body></html>
+

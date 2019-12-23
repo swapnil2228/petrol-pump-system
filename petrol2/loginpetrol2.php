@@ -1,0 +1,39 @@
+
+<html>
+<body bgcolor='grey'>
+
+<form method="post" action="<?php echo $_SERVER['PHP_SELF']; ?>">
+<h1>Login</h1>
+<g><b><p>UserName : </b><input type="text" name="uname" required="required" placeholder="username">*</p>
+<p><b>Password : </b><input type="password" name="upass" required="required" placeholder="eigth digit">*</p>
+<p><input type="submit" value="Login" name="login"/></p>
+</g>
+</form>
+</center>
+<p>&copy All Rights Reserved
+</center></p>
+</body></html>
+<?php
+if(isset($_POST['login']))
+{
+$con=pg_connect("dbname=petroldatabase user=postgres password=redhat") or die ("cannot find connecion");
+$f=$_POST['uname'];
+$l=$_POST['upass'];
+$q="select * from reg";
+$rs=pg_query($q) or die("error");
+while($row=pg_fetch_row($rs))
+{
+if($f==$row[0] && $l==$row[1])
+{
+echo "succesfull";
+header('location: homepetrol.html');
+}
+else
+{
+echo "lerror";
+}
+}
+}
+?>
+
+

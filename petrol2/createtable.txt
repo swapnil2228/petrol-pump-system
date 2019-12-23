@@ -1,0 +1,19 @@
+create table fuel(fuel_id int primary key,fuel_name varchar(20),fuel_type varchar(20),description varchar(20),price money,stock numeric(20),unit varchar(20));
+
+
+create table employee(employee_id int primary key,employee_name varchar(20),employee_address text,employee_phone_no varchar(20),qualification varchar(20),job varchar(20),salary money);
+
+
+create table attendence(employee_id int references employee(employee_id),day varchar(10),month int,year int,status varchar(20));
+
+create table register(username varchar(30) primary key,emailid varchar(30),password varchar(30),confirmpassword varchar(30));
+
+ create table supplier(supplier_id int primary key,supplier_name varchar(20),supplier_fuel_id int references fuel(fuel_id),supplier_tanker_type varchar(20),tanker_description text);
+
+
+create table order1(order_id int primary key,fuel_type varchar(20),supplier_id int references supplier(supplier_id),employee_id int references employee(employee_id),quantity numeric);
+
+ create table sales(sales_id int primary key,fuel_id int references fuel(fuel_id),amount money,quantity int,total_price money,date_of_sale date);
+
+ create table bill(bill_no int primary key,order_id int references order1(order_id),amount money,date date);
+
